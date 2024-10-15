@@ -14,22 +14,22 @@ from app_package import views
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 
-app.secret_key = 'secret3mandarinas'
+app.secret_key = 'secret3'
 app.permanent_session_lifetime = timedelta(minutes=10)
 app.testing = True
 
 
-# Configuración de base de datos
+# ConfiguraciÃ³n de base de datos
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Mandarina#33'
-app.config['MYSQL_DB'] = 'cooptderl'
+app.config['MYSQL_PASSWORD'] = '33'
+app.config['MYSQL_DB'] = 'coop'
 
 #conexion con base de datos
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Mandarina#33@localhost/cooptderl'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:33@localhost/coop'
 
-engine_coop = create_engine('mysql+pymysql://root:Mandarina#33@localhost/cooptderl', echo=True)
+engine_coop = create_engine('mysql+pymysql://root:33@localhost/coop', echo=True)
 
 db = SQLAlchemy(app)
 
