@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>login</title>
+    <style>
+        hr.rounded {
+            border-top: 5px solid #bbb;
+            border-radius: 10px;
+        }
+
+        flabel {
+            font-size: 1px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<!--Navbar-->
+<body style="background-color: #000; color: #fff;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="font-family: 'Arial Rounded MT'" href="{{ url_for('home') }}">COOP-T de R.L.</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('avisos') }}">Avisos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Administrador
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Nuevo Asociado</a></li>
+                            <li><a class="dropdown-item" href="#">Creditos de emergencia</a></li>
+                            <li><a class="dropdown-item" href="#">Cantidad de Rotativo</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Transacciones de caja</a></li>
+                            <li><a class="dropdown-item" href="#">Descuentos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Contabilidad
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Libro diario</a></li>
+                            <li><a class="dropdown-item" href="#">Plan de cuentas</a></li>
+                            <li><a class="dropdown-item" href="#">Libro Mayor</a></li>
+                            <li><a class="dropdown-item" href="#">Estados Financieros</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- **********************************Form big block*********************************************-->
+
+    <div style="margin-top: 10px; margin-right: 20px; margin-bottom: 10px; margin-left: 20px; font-family: 'Arial Rounded MT'; font-size: small">
+        <h1>Registrar</h1>
+        <hr class="rounded" />
+        <form id="datos_generales_as" class="row g-3" action="{{ url_for('register') }}" method="post">
+            <h4>Datos Generales</h4>
+            <div class="col-md-2">
+                <label for="id" class="flabel">Id</label>
+                <input name="id" type="text" class="form-control" style="color:gray;" id="id" required>
+            </div>
+            <div class="col-md-4">
+                <label for="nombres" class="flabel">Nombres</label>
+                <input name="nombres" type="text" class="form-control" style="color:gray;" id="nombres" required>
+            </div>
+            <div class="col-md-4">
+                <label for="apellidos" class="flabel">Apellidos</label>
+                <input name="apellidos" type="text" class="form-control" id="apellidos" required>
+            </div>
+            <div class="col-md-2">
+                <label for="cas_apellido" class="flabel">Apellido de casada</label>
+                <input name="cas_apellido" type="text" class="form-control" id="cas_apellido">
+            </div>
+            <div class="col-md-2">
+                <label for="gender" class="flabel">Genero</label>
+                <select for="gender" id="gender" name="gender" class="form-select" required>
+                    {% for option in genders %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="birthday" class="flabel">Fecha de nacimiento</label>
+                <input name="birthday" type="date" class="form-control" id="birthday" required />
+            </div>
+            <div class="col-md-2">
+                <label for="paises" class="flabel">Pais de nacimiento</label>
+                <select id="paises" name="paises" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el país</option>
+                    {% for option in paises %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="depts" class="flabel">Departamento</label>
+                <select name="depts" id="depts" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el departamento</option>
+                    {% for option in depts %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="muni" class="flabel">Municipio</label>
+                <select name="muni" id="muni" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el municipio</option>
+                    {% for option in munis %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="distr" class="flabel">Distrito</label>
+                <select name="distr" id="distr" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el distrito</option>
+                    {% for option in distrs %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="tipo_casa" class="flabel">Tipo de vivienda</label>
+                <select name="tipo_casa" id="tipo_casa" class="form-select" required>
+                    <option selected style="color:gray;">Tipo de residencia</option>
+                    {% for option in houses %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="time_to_live" class="flabel">Tiempo de residir(meses)</label>
+                <input type="number" id="time_to_live" name="time_to_live" class="form-control" required />
+            </div>
+
+            <div class="col-md-2">
+                <label for="doc_tipo" class="flabel">Documento de identidad</label>
+                <select name="doc_tipo" id="doc_tipo" class="form-select" required>
+                    <option selected style="color:gray;">Tipo de documento de identificación</option>
+                    {% for option in docs %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="num_doc" class="flabel">Numero de documento</label>
+                <input id="num_doc" type="text" class="form-control" name="num_doc" required />
+            </div>
+            <div class="col-md-4">
+                <label for="exp_doc" class="flabel">Fecha de expiración del Documento</label>
+                <input id="exp_doc" type="date" class="form-control" name="exp_doc" required />
+            </div>
+
+
+            <div class="col-md-2">
+                <label for="iss" class="flabel">ISS</label>
+                <input id="iss" class="form-control" type="text" name="iss" />
+            </div>
+            <div class="col-md-2">
+                <label for="nup" class="flabel">NUP</label>
+                <input id="nup" class="form-control" type="text" name="nup" />
+            </div>
+
+            <!---->
+            <div class="col-md-4">
+                <label for="num_contribuyente" class="flabel">Registro de contribuyente</label>
+                <input id="num_contribuyente" class="form-control" type="text" name="num_contribuyente" />
+            </div>
+            <div class="col-md-4">
+                <label for="cat_contribuyente" class="flabel">Categoría de contribuyente</label>
+                <select id="cat_contribuyente" name="cat_contribuyente" class="form-select">
+                    <option selected style="color:gray;">Selecciona una categoría</option>
+                    <option value="grande">Grande</option>
+                    <option value="mediano">Mediano</option>
+                    <option value="otros contribuyentes">Otros Contribuyentes</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="act_economica" class="flabel">Actividad Economica</label>
+                <input name="act_economica" id="act_economica" class="form-control" type="text" placeholder="Empleado, Profesional Independiente, Negocio Propio, Jubilado" />
+            </div>
+            <div class="col-md-2">
+                <label for="est_civil" class="flabel">Estado civil</label>
+                <select name="est_civil" id="est_civil" class="form-select" required>
+                    <option selected style="color:gray;">Seleccione un estado civil</option>
+                    {% for option in civil_states %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="profesion_dui" class="flabel">Profesion segun DUI</label>
+                <input name="profesion_dui" id="profesion_dui" class="form-control" type="text" required />
+            </div>
+            <div class="col-md-4">
+                <label for="n_personas_eco" class="flabel">Número de personas que dependen económicamente</label>
+                <input id="n_personas_eco" name="n_personas_eco" class="form-control" type="text" />
+            </div>
+            <div class="col-md-4">
+                <label for="email" class="flabel">Correo Electronico</label>
+                <input name="email" id="email" type="email" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <label for="n_phone" class="flabel">Numero de telefono</label>
+                <input name="n_phone" id="n_phone" class="form-control" type="tel" />
+            </div>
+            <!--direccion-->
+            <hr class="rounded"/>
+            <div class="col-md-6">
+                <label for="direccion" class="flabel">Domicilio Particular</label>
+                <input name="direccion" id="direccion" class="form-control" type="text" />
+            </div>
+            <div class="col-md-2">
+                <label for="paises_res" class="flabel">Pais de residencia</label>
+                <select id="paises_res" name="paises_res" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el país</option>
+                    {% for option in paises %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="depts_res" class="flabel">Departamento de residencia</label>
+                <select name="depts_res" id="depts_res" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el departamento</option>
+                    {% for option in depts %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="muni_res" class="flabel">Municipio de residencia</label>
+                <select name="muni_res" id="muni_res" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el municipio</option>
+                    {% for option in munis %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="distr_res" class="flabel">Distrito de residencia</label>
+                <select id="distr_res" name="distr_res" class="form-select" required>
+                    <option selected style="color:gray;">Selecciona el distrito</option>
+                    {% for option in distrs %}
+                    {{ option|safe }}
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn btn-light btn-block" type="submit"> Enviar </button>
+        </form>
+        <!--*************************************FIN DE DATOS GENERALES************************************-->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
+
